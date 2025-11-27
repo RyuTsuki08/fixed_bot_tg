@@ -1,5 +1,6 @@
 services:
-  - type: worker
+  # Cambiado a Web Service para permitir keep-alive
+  - type: web
     name: cerebro-bot
     env: python
     region: oregon

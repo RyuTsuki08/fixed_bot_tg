@@ -223,12 +223,22 @@ cerebro-bot/
 
 4. **Configurar variables de entorno**
    
-   Crear archivo `.env`:
+   Copia el archivo de ejemplo y renómbralo a `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edita el archivo `.env` con tus credenciales:
    ```env
    TELEGRAM_BOT_TOKEN=tu_token_de_telegram
-   DEFAULT_GEMINI_API_KEY=tu_key_gemini  # Opcional (fallback)
-   NOTION_INTEGRATION_TOKEN=tu_token_notion  # Opcional (fallback)
+   DEFAULT_GEMINI_API_KEY=tu_key_gemini  # Credencial por defecto (Opcional)
+   NOTION_INTEGRATION_TOKEN=tu_token_notion  # Credencial por defecto (Opcional)
    ```
+
+   > **ℹ️ Nota sobre Credenciales:**
+   > - Las credenciales en `.env` funcionan como **valores por defecto**.
+   > - Si un usuario no configura sus propias credenciales con `/config`, el bot usará automáticamente las del `.env`.
+   > - Esto es ideal para uso personal (solo configuras el `.env` y listo) o para ofrecer una instancia compartida.
 
 5. **Ejecutar el bot**
    ```bash

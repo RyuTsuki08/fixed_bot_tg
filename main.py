@@ -621,7 +621,12 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if voice_file_path and os.path.exists(voice_file_path):
             os.remove(voice_file_path)
 
+import keep_alive
+
 if __name__ == '__main__':
+    # Iniciar servidor web para keep-alive
+    keep_alive.keep_alive()
+    
     if not TELEGRAM_BOT_TOKEN:
         print("❌ Error: TELEGRAM_BOT_TOKEN no encontrado")
     else:
