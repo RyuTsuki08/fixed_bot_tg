@@ -396,9 +396,8 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 
 ## 📧 Contacto
 
-**Tomas** - [LinkedIn](https://linkedin.com/in/tuprofile)
+**Tomas** - [LinkedIn](https://www.linkedin.com/in/christian-paez/)
 
-Link del Proyecto: [https://github.com/tuusuario/cerebro-bot](https://github.com/tuusuario/cerebro-bot)
 
 ---
 
