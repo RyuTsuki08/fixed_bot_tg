@@ -1,0 +1,32 @@
+# Environment variables (NUNCA subir)
+.env
+
+# User configuration (NUNCA subir - contiene tokens)
+users_config.json
+
+# Logs
+bot.log
+*.log
+
+# Backups
+config.json.backup*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Development scripts (opcional)
+debug_notion.py
+check_schema_hack.py
+list_models.py

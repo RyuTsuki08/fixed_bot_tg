@@ -1,0 +1,10 @@
+{
+    "default_user": {
+        "gemini_api_key": null,
+        "notion_token": null,
+        "notion_databases": {},
+        "current_db_alias": null,
+        "created_at": "2025-11-27T00:00:00Z",
+        "note": "Usuario default - usa credenciales del .env como fallback"
+    }
+}

@@ -1,0 +1,15 @@
+services:
+  - type: worker
+    name: cerebro-bot
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: DEFAULT_GEMINI_API_KEY
+        sync: false
+      - key: NOTION_INTEGRATION_TOKEN
+        sync: false
