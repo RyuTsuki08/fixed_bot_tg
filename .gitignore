@@ -30,3 +30,7 @@ Thumbs.db
 debug_notion.py
 check_schema_hack.py
 list_models.py
+
+DEPLOY.md
+config.json.backup_20251127_050315
+bot.log
