@@ -196,7 +196,8 @@ def search_pages(query, limit=10):
             
             # Intentar encontrar la propiedad de título
             for prop_name, prop_data in props.items():
-                if prop_data.get("id") == "title":
+                # Buscar por TIPO 'title', no por ID (que puede cambiar)
+                if prop_data.get("type") == "title":
                     title_list = prop_data.get("title", [])
                     if title_list:
                         title = title_list[0].get("plain_text", "Sin título")
