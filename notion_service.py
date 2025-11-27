@@ -180,59 +180,43 @@ def search_pages(query, limit=10):
     try:
         client = Client(auth=NOTION_TOKEN)
         
-        logger.info(f"Buscando '{query}' en database {database_id}")
-        
-        # Usar search en lugar de query (compatible con todas las versiones)
-        response = client.search(
-            query=query,
-            filter={
-                "property": "object",
-                "value": "page"
-            },
-            page_size=limit
+        # Traer las últimas 50 páginas sin filtrar (más rápido y seguro)
+        response = client.databases.query(
+            database_id=database_id,
+            page_size=50
         )
         
-        logger.info(f"Resultados totales: {len(response.get('results', []))}")
-        
         results = []
-        all_pages = []
+        query_lower = query.lower()
         
         for page in response.get("results", []):
-            # Guardar todas las páginas para debug
-            parent = page.get("parent", {})
-            page_db_id = parent.get("database_id")
+            # Obtener título de manera segura
+            title = "Sin título"
+            props = page.get("properties", {})
             
-            logger.info(f"Página encontrada: parent_type={parent.get('type')}, db_id={page_db_id}")
+            # Intentar encontrar la propiedad de título
+            for prop_name, prop_data in props.items():
+                if prop_data.get("id") == "title":
+                    title_list = prop_data.get("title", [])
+                    if title_list:
+                        title = title_list[0].get("plain_text", "Sin título")
+                    break
             
-            # Intentar obtener título de cualquier página
-            title_prop = page.get("properties", {}).get("Name", {})
-            title_list = title_prop.get("title", [])
-            title = title_list[0].get("text", {}).get("content", "Sin título") if title_list else "Sin título"
-            
-            all_pages.append({
-                "id": page["id"],
-                "title": title,
-                "url": page["url"],
-                "db_id": page_db_id
-            })
-            
-            # Filtrar solo páginas de esta base de datos
-            if parent.get("type") == "database_id" and page_db_id == database_id:
+            # Filtrar en Python (case insensitive)
+            if query_lower in title.lower():
                 results.append({
                     "id": page["id"],
                     "title": title,
                     "url": page["url"]
                 })
-        
-        # Si no encontramos nada en la DB específica, mostrar todas
-        if not results and all_pages:
-            logger.warning(f"No se encontraron páginas en DB {database_id}, mostrando todas")
-            return all_pages
-        
+                
+            if len(results) >= limit:
+                break
+            
         return results
-        
+
     except Exception as e:
-        logger.error(f"Error buscando páginas: {e}", exc_info=True)
+        logger.error(f"Error buscando páginas: {e}")
         return []
 
 def update_page(page_id, **kwargs):
