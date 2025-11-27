@@ -653,4 +653,13 @@ if __name__ == '__main__':
         application.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), chat))
 
         print("✅ Bot iniciado con sistema multi-usuario")
+        
+        # Fix para Windows/Python recientes
+        import asyncio
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
         application.run_polling()
